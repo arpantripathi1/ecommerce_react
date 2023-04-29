@@ -1,17 +1,137 @@
+import {useEffect} from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { useProductContext } from "./context/ProductContext";
+import PageNavigation from "./components/PageNavigation";
+import MyImage from "./components/MyImage";
+import {Container}  from "../src/styles/Container";
+import FormatPrice from "./helpers/FormatPrice"
+import { TbReplace, TbTruckDelivery } from "react-icons/tb"
+import {MdSecurity } from "react-icons/md";
+import Stars from "./components/Stars";
+import { useLocation } from "react-router-dom";
+import AddToCart from "./components/AddToCart";
 
-const SingleProduct = () => {
+// const API = "https://api.pujakaitem.com/api/products";
+// const API = "https://fakestoreapi.com/products";
+
+const SingleProduct = ({item}) => {
+  const { getSingleProduct, isSingleLoading, singleProduct } = useProductContext();
+  // console.log("single perodduct iis", singleProduct);
+  // const {data} = useParams() ;
+  const location = useLocation();
+  console.log(location.state);
+  console.log("image transferred is",location.state.image);
+    // console.log("data is",data,useParams());
+  // console.log("singleProduct value is " + singleProduct);
+  // const { id } = useParams();
+  // const {id :alias , image , name ,company ,price ,description , category , stock , reviews ,stars} = singleProduct;
+
+  // console.log("destructured value from single produc is " + image);
+  // useEffect(() => {
+  //   getSingleProduct(`${API}?id=${id}`);
+  // }, []);
+
+  if (isSingleLoading) {
+    return <div className="page_loading"> Loading.....</div>;
+  }
+
   return (
     <Wrapper>
-      <h1>single product</h1>
+      <PageNavigation title={location.state.name} />
+
+      <Container className="container">
+        <div className="grid grid-two-column center">
+          {/* product image */}
+          <div className="product-image">
+            <img src={location.state.image} alt="product-img" />
+          </div>
+
+          <div className="product-data">
+            <div>{location.state.name}</div>
+            <Stars
+              stars={location.state.stars}
+              reviews={location.state.reviews}
+            />
+            <p className="product-data-price">
+              MRP:
+              <del>
+                <FormatPrice price={location.state.price + 250000} />
+              </del>
+            </p>
+            <p className="product-data-price product-data-real-price">
+              Deal of the day: <FormatPrice price={location.state.price} />
+            </p>
+            <p> {location.state.description}</p>
+            <div className="product-data-warranty">
+              <div className="product-warranty-data">
+                <TbTruckDelivery className="warranty-icon" />
+                <p>Free Delivery</p>
+              </div>
+
+              <div className="product-warranty-data">
+                <TbReplace className="warranty-icon" />
+                <p>30 Days Replacement</p>
+              </div>
+
+              <div className="product-warranty-data">
+                <TbTruckDelivery className="warranty-icon" />
+                <p>Thapa Delivered</p>
+              </div>
+
+              <div className="product-warranty-data">
+                <MdSecurity className="warranty-icon" />
+                <p>2 Year Warranty</p>
+              </div>
+            </div>
+
+            <div className="product-data-info">
+              <p>
+                Available:
+                <span>
+                  {/* {location.state.stock > 0 ? "In Stock" : "Not Available"} */}
+                  In stock
+                </span>
+              </p>
+              <p>
+                ID: <span> {location.state.id}</span>
+              </p>
+              <p>
+                Brand: <span> {location.state.company} </span>
+              </p>
+            </div>
+            <hr />
+            {/* {location.state.stock > 0 && <AddToCart singleProd={singleProduct} />} */}
+            <AddToCart singleProd={location.state} />
+          </div>
+        </div>
+      </Container>
     </Wrapper>
   );
-}
+};
 
 const Wrapper = styled.section`
   .container {
-    padding: 9rem 0;
+    // padding: 9rem 0;
+
+    margin : 10px;
   }
+  
+  .center{
+    display: flex;
+    justify-content: center;
+  }
+
+  .product-image {
+    display: flex;
+    align-items: center;
+  }
+
+  img {
+     max-width: 400px ;
+    height:auto ;
+  }
+
   .product-data {
     display: flex;
     flex-direction: column;

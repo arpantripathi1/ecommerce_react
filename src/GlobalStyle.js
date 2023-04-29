@@ -85,13 +85,13 @@ li {
 ${"" /* resuable code section  */}
 
 .container {
-  max-width: 120rem;
+  max-width: 90rem;
   margin: 0 auto;
 }
 
 .grid {
   display: grid;
-  gap: 9rem;
+  gap: 8rem;
 }
 
 .grid-two-column {

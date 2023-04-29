@@ -3,14 +3,14 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import {Button} from "../styles/Button"
 
-const HeroSection = ({data}) => {
+const HeroSection = ({myData}) => {
   return (
     <Wrapper>
         <div className='container'>
             <div className='grid grid-two-column'>
                 <div className='hero-section-data'>
                     <p className='intro-data'>Welcome to</p>
-                    <h1>{ data.name }</h1>
+                    <h1>{ myData.name }</h1>
                     <p>bhuguyu ufh gyu gyu yuguyu ihio jomlpmkoh yuvgy cftxdrxsw  ertctrctyvh  vgyvyyytftfcyt crt xrexdr drxrftcgyvyvyh vybhuububhub uuuhuh  bhubuhhuhub</p>
                     <NavLink>
                         <Button>shop now</Button>

@@ -10,6 +10,7 @@ import ErrorPage from "./ErrorPage";
 import { GlobalStyle } from "./GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const App = () => {
   const theme = {
@@ -41,13 +42,14 @@ const App = () => {
         <Header />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/about" element={<About />} />
-          <Route exact path="/products" element={<Products />} />
-          <Route exact path="/contact" element={<Contact />} />
-          <Route exact path="/singleproduct/:id" element={<SingleProduct />} />
-          <Route exact path="/cart" element={<Cart />} />
+          <Route exact path="about" element={<About />} />
+          <Route exact path="products" element={<Products />} />
+          <Route exact path="contact" element={<Contact />} />
+          <Route exact path="singleproduct/:id" element={<SingleProduct />} />
+          <Route exact path="cart" element={<Cart />} />
           <Route exact path="*" element={<ErrorPage />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );

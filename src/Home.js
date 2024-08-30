@@ -7,7 +7,7 @@ import Trusted from "./components/Trusted";
 const Home = () => {
 
   const  data = {
-    name: "Shopify",
+    name: "SlCart",
   };
 
   return (
